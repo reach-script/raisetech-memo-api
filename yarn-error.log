@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/mizu/.nodebrew/node/v14.16.0/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add -D @types/micro-jwt-auth
+  /Users/mizu/.nodebrew/node/v14.16.0/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add urlencoded-body-parse
 
 PATH: 
   /Users/mizu/Library/Python/3.9/bin:/Users/mizu/.goenv/versions/1.16.3/bin:/Users/mizu/.goenv/bin:/Users/mizu/command:/Users/mizu/.nodebrew/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/mizu/Library/Python/3.9/bin:/Users/mizu/.goenv/versions/1.16.3/bin:/Users/mizu/.goenv/shims:/Users/mizu/.goenv/bin:/Users/mizu/command:/Users/mizu/.nodebrew/current/bin:./node_modules/.bin:/Users/mizu/go/bin:./node_modules/.bin:/usr/local/share/dotnet:/Users/mizu/go/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fmicro-jwt-auth: Not found
+  Error: https://registry.yarnpkg.com/urlencoded-body-parse: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:140749:22)
       at Request.emit (events.js:315:20)
@@ -47,12 +47,13 @@ npm manifest:
       "typescript": "^4.3.5"
     },
     "scripts": {
-      "start": "micro ./build/index.js",
+      "start": "micro -l tcp://0.0.0.0:$PORT ./build/index.js",
       "dev": "node -r ts-node/register/transpile-only  node_modules/.bin/micro-dev  ./src/index.ts",
       "build": "tsc -b"
     },
     "dependencies": {
       "@supabase/supabase-js": "^1.21.0",
+      "dotenv": "^10.0.0",
       "jsonwebtoken": "^8.5.1",
       "micro": "^9.3.4",
       "micro-cors": "^0.1.1",
@@ -962,6 +963,11 @@ Lockfile:
     version "5.0.1"
     resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
     integrity sha512-4As8uPrjfwb7VXC+WnLCbXK7y+Ueb2B3zgNCePYfhxS1PYeaO1YTeplffTEcbfLhvFNGLAz90VvJs9yomG7bow==
+  
+  dotenv@^10.0.0:
+    version "10.0.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+    integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
   
   ecdsa-sig-formatter@1.0.11:
     version "1.0.11"
