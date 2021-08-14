@@ -3,6 +3,7 @@ import { get, post, del, router, put } from 'microrouter';
 import { internalServerError, unAuthorizedError } from '../error';
 import { client } from '../libs/db/client';
 import { jwtAuth } from '../utils';
+import { validate } from '../utils/validation';
 
 const INVALID_ID = 'IDが不正です';
 
@@ -32,6 +33,11 @@ export default router(
       try {
         const { id } = req.jwt;
         const memo = await json(req);
+        const valid = validate(memo);
+        if (!valid) {
+          const message = validate.errors.map((item) => item.message);
+          return { message };
+        }
 
         const { data, error } = await client.from('memo').insert([{ user_id: id, ...memo }]);
         if (error) {
@@ -57,11 +63,19 @@ export default router(
       const { id } = req.params;
       const { id: userId } = req.jwt;
 
+      const message: Array<string> = [];
       if (!id) {
-        return { message: [INVALID_ID] };
+        message.push(INVALID_ID);
+      }
+      const memo = await json(req);
+      const valid = validate(memo);
+      if (!valid) {
+        message.push(...validate.errors.map((item) => item.message));
       }
 
-      const memo = await json(req);
+      if (message.length > 0) {
+        return { message };
+      }
 
       const { data, error } = await client.from('memo').update(memo).eq('id', id).eq('user_id', userId);
       console.info(data, error);

@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/ajv": "^1.0.0",
+    "@types/ajv-errors": "^2.0.1",
     "@types/jsonwebtoken": "^8.5.4",
     "@types/micro": "^7.3.6",
     "@types/micro-cors": "^0.1.2",
@@ -24,6 +26,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.21.0",
+    "ajv": "^8.6.2",
+    "ajv-errors": "^3.0.0",
     "dotenv": "^10.0.0",
     "jsonwebtoken": "^8.5.1",
     "micro": "^9.3.4",
