@@ -1,0 +1,170 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "raisetech-memo-api",
+  "dateExported": "2021-08-14T09:45:09.504Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "containerId": "",
+      "sortNum": 10000,
+      "name": "memo",
+      "_id": "426be239-0fda-418c-9ac5-f36d81b92aac",
+      "created": "2021-08-13T07:59:19.470Z"
+    }
+  ],
+  "requests": [
+    {
+      "containerId": "426be239-0fda-418c-9ac5-f36d81b92aac",
+      "sortNum": 10000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "Authorization", "value": "{{token}}" }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "memos",
+      "url": "{{base}}/memos",
+      "method": "GET",
+      "modified": "2021-08-13T08:14:19.714Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "abcb0074-f402-4dc9-90cc-fde8dcb0df2f",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "tests": []
+    },
+    {
+      "containerId": "426be239-0fda-418c-9ac5-f36d81b92aac",
+      "sortNum": 20000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "Authorization", "value": "{{token}}" }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "create",
+      "url": "{{base}}/memo",
+      "method": "POST",
+      "modified": "2021-08-14T02:54:20.241Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "b20278b0-e8c9-4254-a82b-5f29b7384081",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"タイトルです\",\n  \"category\": \"授業メモ\",\n  \"description\": \"詳細\",\n  \"date\": \"2021/08/01\",\n  \"mark_div\": 1\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "426be239-0fda-418c-9ac5-f36d81b92aac",
+      "sortNum": 30000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "Authorization", "value": "{{token}}" }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "update",
+      "url": "{{base}}/memo/1",
+      "method": "PUT",
+      "modified": "2021-08-14T03:09:37.887Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "d517acc6-04f2-4c93-a1f6-292be32bb789",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"今日の講義について\",\n  \"category\": \"授業メモ\",\n  \"description\": \"第９回の授業メモです\\\\nこんなことしました。\",\n  \"date\": \"2021/08/14\",\n  \"mark_div\": 1\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "426be239-0fda-418c-9ac5-f36d81b92aac",
+      "sortNum": 40000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "Authorization", "value": "{{token}}" }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "delete",
+      "url": "{{base}}/memo/9",
+      "method": "DELETE",
+      "modified": "2021-08-13T23:41:01.499Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "b35fe146-328a-4905-aa58-e8561f1e1c1a",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 50000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "login",
+      "url": "{{base}}/login",
+      "method": "POST",
+      "modified": "2021-08-13T14:06:04.394Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "6d27cd48-180a-4dbc-9dc3-631ff2b50e75",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token}}"
+        }
+      ]
+    },
+    {
+      "containerId": "",
+      "sortNum": 60000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "fb5cb6f6-4f80-471f-8baa-53708bead08a",
+      "name": "logout",
+      "url": "{{base}}/logout",
+      "method": "POST",
+      "modified": "2021-08-13T14:13:58.692Z",
+      "created": "2021-08-13T07:59:19.473Z",
+      "_id": "56ed7217-36c5-4333-bd87-b008819ea00e",
+      "params": [{ "name": "base", "value": "", "isPath": true }],
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.foo",
+          "action": "setto",
+          "value": "{{token}}"
+        }
+      ]
+    }
+  ]
+}

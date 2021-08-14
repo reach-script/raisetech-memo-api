@@ -16,11 +16,19 @@ yarn dev
 
 ## API Test
 
-[Postman](https://www.postman.com/)
+[Thunder Client](https://www.thunderclient.io/)
 
-以下の JSON ファイルをダウンロードし、
-Postman にて import する
-[raisetech-memo-api.postman_collection.json](./docs/raisetech-memo-api.postman_collection.json)
+VACode の拡張 Thunder Client を install
+
+以下の JSON ファイルをダウンロードし各タブで import を行う
+
+- Collections へ import
+
+  [thunder-collection_raisetech-memo-api.json](./docs/thunder-collection_raisetech-memo-api.json)
+
+- ENV へ import
+
+  [thunder-environment_raisetech-memo-api-dev.json](./docs/thunder-environment_raisetech-memo-api-dev.json)
 
 ## Deploy
 
