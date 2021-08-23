@@ -1,7 +1,8 @@
 import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
-
+import ajvKeywords from 'ajv-keywords';
 const ajv = new Ajv({ allErrors: true });
+ajvKeywords(ajv, ['transform']);
 ajvErrors(ajv);
 
 const schema = {
@@ -14,6 +15,8 @@ const schema = {
     title: {
       type: 'string',
       description: 'タイトル',
+      transform: ['trim'],
+      minLength: 1,
     },
     category: {
       type: 'string',
@@ -40,6 +43,7 @@ const schema = {
       title: 'タイトルは必須です',
     },
     properties: {
+      title: 'タイトルは必須です',
       mark_div: 'マーク区分は数値で入力してください',
       date: '日付の形式が不正です',
     },
