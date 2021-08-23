@@ -4,5 +4,5 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const jwtAuth = auth(JWT_SECRET, {
-  resAuthInvalid: JSON.stringify({ message: 'unauthorized' }),
+  resAuthMissing: JSON.stringify({ message: 'unauthorized' }),
 });

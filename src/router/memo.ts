@@ -1,4 +1,4 @@
-import { json } from 'micro';
+import { json, send } from 'micro';
 import { get, post, del, router, put } from 'microrouter';
 import { internalServerError, unAuthorizedError } from '../error';
 import { client } from '../libs/db/client';
@@ -13,6 +13,7 @@ export default router(
     jwtAuth(async (req) => {
       const { id } = req.jwt;
       if (!id) {
+        console.info('401です');
         return unAuthorizedError();
       }
       const { data: memos, error } = await client
@@ -29,14 +30,15 @@ export default router(
   ),
   post(
     '/memo',
-    jwtAuth(async (req) => {
+    jwtAuth(async (req, res) => {
       try {
         const { id } = req.jwt;
         const memo = await json(req);
         const valid = validate(memo);
         if (!valid) {
           const message = validate.errors.map((item) => item.message);
-          return { message };
+          send(res, 400, { message });
+          return;
         }
 
         const { data, error } = await client.from('memo').insert([{ user_id: id, ...memo }]);
@@ -59,7 +61,7 @@ export default router(
   ),
   put(
     '/memo/:id',
-    jwtAuth(async (req) => {
+    jwtAuth(async (req, res) => {
       const { id } = req.params;
       const { id: userId } = req.jwt;
 
@@ -74,7 +76,8 @@ export default router(
       }
 
       if (message.length > 0) {
-        return { message };
+        send(res, 400, { message });
+        return;
       }
 
       const { data, error } = await client.from('memo').update(memo).eq('id', id).eq('user_id', userId);
