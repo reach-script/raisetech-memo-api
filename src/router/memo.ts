@@ -1,6 +1,6 @@
 import { json, send } from 'micro';
 import { get, post, del, router, put } from 'microrouter';
-import { internalServerError, unAuthorizedError } from '../error';
+import { internalServerError } from '../error';
 import { client } from '../libs/db/client';
 import { jwtAuth } from '../utils';
 import { validate } from '../utils/validation';
@@ -12,10 +12,6 @@ export default router(
     '/memos',
     jwtAuth(async (req) => {
       const { id } = req.jwt;
-      if (!id) {
-        console.info('401です');
-        return unAuthorizedError();
-      }
       const { data: memos, error } = await client
         .from('memo')
         .select('id,title,category,description,date,mark_div')
