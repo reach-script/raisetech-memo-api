@@ -5,4 +5,5 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const jwtAuth = auth(JWT_SECRET, {
   resAuthMissing: JSON.stringify({ message: 'unauthorized' }),
+  resAuthInvalid: JSON.stringify({ message: 'unauthorized' }),
 });
