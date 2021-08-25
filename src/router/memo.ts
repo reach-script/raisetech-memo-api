@@ -69,7 +69,11 @@ export default router(
       const {
         data: [currentMemo],
         error: getError,
-      } = await client.from('memo').select('id,title,category,description,date,mark_div').eq('user_id', id);
+      } = await client
+        .from('memo')
+        .select('id,title,category,description,date,mark_div')
+        .eq('user_id', userId)
+        .eq('id', id);
 
       if (getError) {
         throw internalServerError();
@@ -119,7 +123,11 @@ export default router(
       const {
         data: [currentMemo],
         error: getError,
-      } = await client.from('memo').select('id,title,category,description,date,mark_div').eq('user_id', id);
+      } = await client
+        .from('memo')
+        .select('id,title,category,description,date,mark_div')
+        .eq('user_id', userId)
+        .eq('id', id);
 
       if (getError) {
         throw internalServerError();
