@@ -1,9 +1,16 @@
 import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
 import ajvKeywords from 'ajv-keywords';
+import ajvFormats from 'ajv-formats';
 const ajv = new Ajv({ allErrors: true });
 ajvKeywords(ajv, ['transform']);
 ajvErrors(ajv);
+ajvFormats(ajv);
+
+ajv.addFormat('custom-date', (str) => {
+  const valid = new Date(str).toString() !== 'Invalid Date';
+  return valid;
+});
 
 const schema = {
   type: 'object',
@@ -29,7 +36,7 @@ const schema = {
     date: {
       type: 'string',
       description: '日付',
-      pattern: '[0-9]{4}/[0-9]{2}/[0-9]{2}',
+      format: 'custom-date',
     },
     mark_div: {
       type: 'number',

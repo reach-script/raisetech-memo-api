@@ -9,7 +9,7 @@ const INVALID_ID = 'IDが不正です';
 
 export default router(
   get(
-    '/memos',
+    '/api/memos',
     jwtAuth(async (req) => {
       const { id } = req.jwt;
       const { data: memos, error } = await client
@@ -21,11 +21,11 @@ export default router(
         throw internalServerError(error.message);
       }
 
-      return memos;
+      return memos.map((memo) => ({ ...memo, id: memo.id.toString() }));
     }),
   ),
   post(
-    '/memo',
+    '/api/memo',
     jwtAuth(async (req, res) => {
       try {
         const { id } = req.jwt;
@@ -49,14 +49,14 @@ export default router(
         const insertedMemo = data[0];
         delete insertedMemo.user_id;
 
-        return { ...insertedMemo };
+        return { ...insertedMemo, id: insertedMemo.id.toString() };
       } catch (error) {
         throw internalServerError(error.message);
       }
     }),
   ),
   put(
-    '/memo/:id',
+    '/api/memo/:id',
     jwtAuth(async (req, res) => {
       const { id } = req.params;
       const { id: userId } = req.jwt;
@@ -65,6 +65,25 @@ export default router(
       if (!id) {
         message.push(INVALID_ID);
       }
+
+      const {
+        data: [currentMemo],
+        error: getError,
+      } = await client
+        .from('memo')
+        .select('id,title,category,description,date,mark_div')
+        .eq('user_id', userId)
+        .eq('id', id);
+
+      if (getError) {
+        throw internalServerError();
+      }
+
+      if (!currentMemo) {
+        send(res, 400, { message: 'IDが不正です' });
+        return;
+      }
+
       const memo = await json(req);
       const valid = validate(memo);
       if (!valid) {
@@ -89,16 +108,34 @@ export default router(
       const updatedMemo = data[0];
       delete updatedMemo.user_id;
 
-      return updatedMemo;
+      return { ...updatedMemo, id: updatedMemo.id.toString() };
     }),
   ),
   del(
-    '/memo/:id',
-    jwtAuth(async (req) => {
+    '/api/memo/:id',
+    jwtAuth(async (req, res) => {
       const { id } = req.params;
       const { id: userId } = req.jwt;
       if (!id) {
         return { message: [INVALID_ID] };
+      }
+
+      const {
+        data: [currentMemo],
+        error: getError,
+      } = await client
+        .from('memo')
+        .select('id,title,category,description,date,mark_div')
+        .eq('user_id', userId)
+        .eq('id', id);
+
+      if (getError) {
+        throw internalServerError();
+      }
+
+      if (!currentMemo) {
+        send(res, 400, { message: 'IDが不正です' });
+        return;
       }
 
       const { data, error } = await client.from('memo').delete().eq('id', id).eq('user_id', userId);
@@ -112,7 +149,7 @@ export default router(
 
       const deletedMemo = data[0];
       delete deletedMemo.user_id;
-      return deletedMemo;
+      return { ...deletedMemo, id: deletedMemo.id.toString() };
     }),
   ),
 );

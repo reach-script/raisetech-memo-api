@@ -7,7 +7,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export default router(
-  post('/login', async (req, res) => {
+  post('/api/login', async (req, res) => {
     const data = await json(req);
     const { email, password } = data;
 
@@ -35,7 +35,7 @@ export default router(
 
     return { access_token: token };
   }),
-  post('/logout', async () => {
+  post('/api/logout', async () => {
     return { message: 'logout' };
   }),
 );
