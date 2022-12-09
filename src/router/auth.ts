@@ -11,7 +11,6 @@ export default router(
     const data = await json(req);
     const { email, password } = data;
 
-    // TODO パスワードの暗号化とかセキュアな方法調査(?)
     const { data: users } = await client.from('user').select('*').eq('email', email);
 
     if (users.length === 0) {

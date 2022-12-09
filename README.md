@@ -18,7 +18,9 @@ yarn dev
 
 [Thunder Client](https://www.thunderclient.io/)
 
-VACode の拡張 Thunder Client を install
+(Postman でも可能)
+
+VSCode の拡張 Thunder Client を install
 
 以下の JSON ファイルをダウンロードし各タブで import を行う
 
@@ -29,7 +31,3 @@ VACode の拡張 Thunder Client を install
 - ENV へ import
 
   [thunder-environment_raisetech-memo-api-dev.json](./docs/thunder-environment_raisetech-memo-api-dev.json)
-
-## Deploy
-
-[Heroku](https://dashboard.heroku.com/apps)

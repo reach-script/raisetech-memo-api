@@ -4,7 +4,7 @@
   "dateExported": "2021-08-14T09:52:36.509Z",
   "version": "1.0",
   "variables": [
-    { "name": "base", "value": "http://localhost:3000" },
+    { "name": "base", "value": "http://localhost:3000/api" },
     { "name": "email", "value": "mizu@example.com" },
     { "name": "password", "value": "12345" }
   ]
